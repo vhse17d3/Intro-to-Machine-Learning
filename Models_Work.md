@@ -8,7 +8,9 @@ Bạn hỏi anh họ của mình xem trước đây anh ấy dự đoán giá tr
 Học máy hoạt động theo cách tương tự. Chúng ta sẽ bắt đầu với một mô hình có tên là Cây quyết định. Có những mô hình đẹp hơn đưa ra những dự đoán chính xác hơn. Nhưng cây quyết định rất dễ hiểu và chúng là khối xây dựng cơ bản cho một số mô hình tốt nhất trong khoa học dữ liệu. 
 
 Để đơn giản, chúng ta sẽ bắt đầu với cây quyết định đơn giản nhất có thể
+
 ![Alt Text](https://storage.googleapis.com/kaggle-media/learn/images/7tsb5b1.png)
+
 => Nó chia nhà thành hai loại. Giá dự đoán cho bất kỳ ngôi nhà nào đang được xem xét là giá trung bình lịch sử của những ngôi nhà cùng loại.
 
 - Chúng sử dụng dữ liệu để quyết định cách chia các ngôi nhà thành hai nhóm và sau đó xác định lại giá dự đoán ở mỗi nhóm. Bước thu thập các mẫu từ dữ liệu này được gọi là **điều chỉnh hoặc huấn luyện** mô hình. Dữ liệu được sử dụng để **phù hợp** với mô hình được gọi là **dữ liệu huấn luyện**.
@@ -16,10 +18,12 @@ Học máy hoạt động theo cách tương tự. Chúng ta sẽ bắt đầu v
 - Các chi tiết về mức độ phù hợp của mô hình (ví dụ: cách phân chia dữ liệu) đủ phức tạp để chúng tôi sẽ lưu lại sau. Sau khi mô hình đã phù hợp, bạn có thể áp dụng nó vào dữ liệu mới để **dự đoán** giá của những ngôi nhà bổ sung.
 # Improving the Decision Tree
 ![alt text](https://storage.googleapis.com/kaggle-media/learn/images/prAjgku.png)   
+
 Cây quyết định ở bên trái (Cây quyết định 1) có lẽ hợp lý hơn, vì nó phản ánh thực tế rằng những ngôi nhà có nhiều phòng ngủ có xu hướng bán với giá cao hơn những ngôi nhà có ít phòng ngủ. Thiếu sót lớn nhất của mô hình này là nó không nắm bắt được hầu hết các yếu tố ảnh hưởng đến giá nhà, như số lượng phòng tắm, quy mô lô đất, vị trí, v.v.
 
 Bạn có thể nắm bắt được nhiều yếu tố hơn bằng cách sử dụng cây có nhiều "phần chia" hơn. Chúng được gọi là cây "sâu hơn". Cây quyết định cũng xem xét tổng diện tích lô đất của mỗi ngôi nhà có thể trông như thế này:
 ![alt text](https://storage.googleapis.com/kaggle-media/learn/images/R3ywQsR.png)
+
 Bạn dự đoán giá của bất kỳ ngôi nhà nào bằng cách truy tìm cây quyết định, luôn chọn đường đi tương ứng với đặc điểm của ngôi nhà đó. Giá dự đoán của ngôi nhà nằm ở phần dưới cùng của cây. Điểm ở phía dưới nơi chúng ta đưa ra dự đoán được gọi là chiếc **lá**.
 # Xác thực mô hình là gì
 Bạn sẽ muốn đánh giá hầu hết mọi mô hình bạn từng xây dựng. Trong hầu hết (mặc dù không phải tất cả) ứng dụng, thước đo liên quan đến chất lượng mô hình là độ chính xác dự đoán. Nói cách khác, liệu những dự đoán của mô hình có gần với những gì thực sự xảy ra hay không.
@@ -63,6 +67,7 @@ mean_absolute_error(y, predicted_home_prices)
 out_put: 434.71594577146544
 # Underfitting and Overfitting
 ![alt text](https://storage.googleapis.com/kaggle-media/learn/images/R3ywQsR.png)
+
 Trong thực tế, không có gì lạ khi một cái cây có 10 nhánh giữa ngọn (tất cả các ngôi nhà) và một chiếc lá. Khi cây càng sâu, tập dữ liệu sẽ được chia thành các lá với ít ngôi nhà hơn. Nếu một cây chỉ có 1 phần chia thì nó sẽ chia dữ liệu thành 2 nhóm. Nếu chia mỗi nhóm lại thì chúng ta sẽ có 4 nhóm nhà. Tách từng nhóm một lần nữa sẽ tạo ra 8 nhóm. Nếu chúng ta tiếp tục tăng gấp đôi số nhóm bằng cách thêm nhiều phần chia ở mỗi cấp, chúng ta sẽ có $2^{10}$ các nhóm nhà khi chúng tôi lên đến tầng 10. Đó là 1024 lá.
 
 Khi chia các ngôi nhà ra nhiều lá, chúng ta cũng có ít nhà hơn trong mỗi lá. Những lá có rất ít ngôi nhà sẽ đưa ra những dự đoán khá gần với giá trị thực tế của những ngôi nhà đó, nhưng có thể lại đưa ra những dự đoán rất không đáng tin cậy đối với dữ liệu mới (vì mỗi dự đoán chỉ dựa trên một vài ngôi nhà).=> Đây là một hiện tượng được gọi là **Overfitting (trang bị quá mức)**, trong đó một mô hình khớp gần như hoàn hảo với dữ liệu huấn luyện nhưng lại kém hiệu quả trong việc xác thực và các dữ liệu mới khác. Mặt khác, nếu chúng ta làm cho cây rất nông, nó sẽ không chia các ngôi nhà thành các nhóm rất riêng biệt.
@@ -71,6 +76,7 @@ Khi chia các ngôi nhà ra nhiều lá, chúng ta cũng có ít nhà hơn trong
 
 Vì chúng tôt quan tâm đến độ chính xác của dữ liệu mới mà chúng ta ước tính từ dữ liệu xác thực của mình, nên chúng ta muốn tìm ra điểm phù hợp giữa trang bị thiếu và trang bị quá mức. Nhìn trực quan, chúng tôi muốn điểm thấp của đường cong xác thực (màu đỏ) trong hình bên dưới. 
 ![alt text](https://storage.googleapis.com/kaggle-media/learn/images/AXSEOfI.png)
+
 Chúng ta có thể sử dụng hàm tiện ích để giúp so sánh điểm MAE từ các giá trị khác nhau cho max_leaf_nodes:
 ```python
 from sklearn.metrics import mean_absolute_error
