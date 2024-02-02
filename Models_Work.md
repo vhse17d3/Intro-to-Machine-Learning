@@ -69,7 +69,7 @@ Khi chia các ngôi nhà ra nhiều lá, chúng ta cũng có ít nhà hơn trong
 
 Ở mức độ cực đoan, nếu một cái cây chỉ chia các ngôi nhà thành 2 hoặc 4 thì mỗi nhóm vẫn có rất nhiều loại nhà. Các dự đoán kết quả có thể khác xa đối với hầu hết các ngôi nhà, ngay cả trong dữ liệu huấn luyện (và nó cũng sẽ rất tệ trong việc xác thực vì lý do tương tự). Khi một mô hình không nắm bắt được các điểm khác biệt và mẫu quan trọng trong dữ liệu, do đó nó hoạt động kém ngay cả trong dữ liệu huấn luyện, điều đó được gọi là **underfitting (không phù hợp)**.
 
-Vì chúng tôta quan tâm đến độ chính xác của dữ liệu mới mà chúng ta ước tính từ dữ liệu xác thực của mình, nên chúng ta muốn tìm ra điểm phù hợp giữa trang bị thiếu và trang bị quá mức. Nhìn trực quan, chúng tôi muốn điểm thấp của đường cong xác thực (màu đỏ) trong hình bên dưới. 
+Vì chúng tôt quan tâm đến độ chính xác của dữ liệu mới mà chúng ta ước tính từ dữ liệu xác thực của mình, nên chúng ta muốn tìm ra điểm phù hợp giữa trang bị thiếu và trang bị quá mức. Nhìn trực quan, chúng tôi muốn điểm thấp của đường cong xác thực (màu đỏ) trong hình bên dưới. 
 ![alt text](https://storage.googleapis.com/kaggle-media/learn/images/AXSEOfI.png)
 Chúng ta có thể sử dụng hàm tiện ích để giúp so sánh điểm MAE từ các giá trị khác nhau cho max_leaf_nodes:
 ```python
